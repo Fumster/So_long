@@ -1,23 +1,24 @@
-SOURCES = 	main.c
+SOURCES = 	main.c mlx_helpers.c
 OBJECTS =	$(SOURCES:.c=.o)
 HEADER = 	so_long.h
 CC = 		gcc
 NAME =		so_long
 INCLUDES =	-L./minilibx -lmlx -L/usr/lib -lXext -lX11 -lm -lbsd
 FLAGS =		-Wall -Wextra -Werror
+VPATH = 	obj:src:hdr
 
 .PHONY:		all re clean fclean
 
 all:		$(NAME)
 
-$(NAME):	obj/$(OBJECTS)
-			$(CC) $(FLAGS) obj/$(OBJECTS) $(INCLUDES) -o $@
+$(NAME):	$(OBJECTS)
+			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS)) $(INCLUDES) -o $@
 
-obj/%.o:		src/%.c hdr/$(HEADER)
-			$(CC) $(FLAGS) $< -c -o $@
+%.o:		%.c $(HEADER)
+			$(CC) $(FLAGS) $< -c -o obj/$@
 
 clean:
-			rm -rf obj/$(OBJECTS)
+			rm -rf $(addprefix obj/,$(OBJECTS))
 
 fclean:		clean
 			rm -rf $(NAME)
