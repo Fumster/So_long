@@ -15,10 +15,11 @@ $(NAME):	$(OBJECTS)
 			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS)) $(INCLUDES) -o $@
 
 %.o:		%.c $(HEADER)
+			@mkdir -p obj
 			$(CC) $(FLAGS) $< -c -o obj/$@
 
 clean:
-			rm -rf $(addprefix obj/,$(OBJECTS))
+			rm -rf obj/
 
 fclean:		clean
 			rm -rf $(NAME)
