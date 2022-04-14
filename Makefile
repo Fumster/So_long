@@ -7,8 +7,6 @@ OSFLAG 				:=
 		OSFLAG += OSX
 	endif
 
-os:
-	@echo $(OSFLAG)
 
 SOURCES = 	main.c mlx_helpers.c
 OBJECTS =	$(SOURCES:.c=.o)
@@ -21,10 +19,13 @@ VPATH = 	obj:src:hdr
 
 .PHONY:		all re clean fclean
 
-all:		ftprintf $(NAME)
+all:		ftprintf mlx $(NAME)
 
 ftprintf:	
 			@make -C libs/ft_printf
+
+mlx:
+			@make -C libs/minilibx
 
 $(NAME):	$(OBJECTS)
 			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS)) $(INCLUDES) -o $@
@@ -36,6 +37,7 @@ $(NAME):	$(OBJECTS)
 clean:
 			rm -rf obj/
 			@make clean -C libs/ft_printf
+			@make clean -C libs/minilibx
 
 fclean:		clean
 			rm -rf $(NAME)
@@ -43,6 +45,8 @@ fclean:		clean
 
 re:			fclean all
 
+os:
+	@echo $(OSFLAG)
 
 
 #gcc main.c -L./minilibx -lmlx -L/usr/lib -lXext -lX11 -lm -lbsd -o run
