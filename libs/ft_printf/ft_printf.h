@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-typedef struct s_list
+typedef struct s_params
 {
 	int		prnt_cntr;
 	char	specificator;

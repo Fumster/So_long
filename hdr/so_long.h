@@ -14,15 +14,17 @@
 	# include "../libs/minilibx/mlx.h"
 	# include "../libs/minilibx/mlx_int.h"
 	# define ESC_KEY 65307
-	# define W_KEY 13
-	# define S_KEY 1
-	# define A_KEY 0
-	# define D_KEY 2
+	# define W_KEY 119
+	# define S_KEY 115
+	# define A_KEY 97
+	# define D_KEY 100
 #endif
 
 # include "../libs/ft_printf/ft_printf.h"
+# include "../libs/get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_ambiance
 {
@@ -47,10 +49,10 @@ typedef struct s_vars
 	void		*window;
 	int			map_w;
 	int			map_h;
-	char		**map;
+	char		map[200][200];
 	int			collected;
 	t_sprite	player;
-	t_sprite	enemy[50];
+	t_sprite	enemy[100];
 	t_ambiance	wall;
 	t_ambiance	floor;
 	t_ambiance	exit;

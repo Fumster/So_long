@@ -14,25 +14,25 @@ int key_hook(int keycode, t_vars *vars)
 		dstr_w(vars);
 	if (keycode == W_KEY)
 	{
-		vars->player.y -= 35;
+		vars->player.y -= 42;
 		mlx_put_image_to_window(vars->mlx, vars->window, vars->player.img, 
 								vars->player.x, vars->player.y);
 	}
 	if (keycode == S_KEY)
 	{
-		vars->player.y += 35;
+		vars->player.y += 42;
 		mlx_put_image_to_window(vars->mlx, vars->window, vars->player.img, 
 								vars->player.x, vars->player.y);
 	}
 	if (keycode == A_KEY)
 	{
-		vars->player.x -= 35;
+		vars->player.x -= 42;
 		mlx_put_image_to_window(vars->mlx, vars->window, vars->player.img, 
 								vars->player.x, vars->player.y);
 	}
 	if (keycode == D_KEY)
 	{
-		vars->player.x += 35;
+		vars->player.x += 42;
 		mlx_put_image_to_window(vars->mlx, vars->window, vars->player.img, 
 								vars->player.x, vars->player.y);
 	}
