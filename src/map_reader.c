@@ -6,8 +6,10 @@ int read_map (t_vars *vars, char *path)
 	int	fd;
 	char	str;
 
+	
 	i = 0;
 	fd = open(path, O_RDONLY);
 	str = get_next_line(fd);
-
+	ft_printf("str is %s", str);
+	return(0);
 }
