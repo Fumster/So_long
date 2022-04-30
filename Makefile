@@ -12,7 +12,7 @@ ifeq ($(UNAME_S),Darwin)
 	CLEAN = clean_osx
 endif
 
-LIBS +=		-L./libs/ft_printf -lftprintf -L./libs/get_next_line -lgetnextline
+LIBS +=		-L./libs/ft_printf -lftprintf -L./libs/get_next_line -lgetnextline -L./libs/libft -lft
 SOURCES = 	main.c mlx_helpers.c
 OBJECTS =	$(SOURCES:.c=.o)
 HEADER = 	so_long.h
@@ -23,13 +23,16 @@ VPATH = 	obj:src:hdr
 
 .PHONY:		all re clean fclean
 
-all:		gnl ftprintf $(MLX) $(NAME)
+all:		gnl ftprintf libft $(MLX) $(NAME)
+
+gnl:	
+			@make -C libs/get_next_line
 
 ftprintf:	
 			@make -C libs/ft_printf
 
-gnl:	
-			@make -C libs/get_next_line
+libft:	
+			@make -C libs/libft
 
 mlx_lin:
 			@make -C libs/minilibx
@@ -45,21 +48,26 @@ $(NAME):	$(OBJECTS)
 			$(CC) $(FLAGS) $< -c -o obj/$@
 
 clean:		$(CLEAN)
+			@make clean -C libs/ft_printf
+			@make clean -C libs/get_next_line
+			@make clean -C libs/libft
 
 
 clean_lin:
 			rm -rf obj/
-			@make clean -C libs/ft_printf
+#			@make clean -C libs/ft_printf
 			@make clean -C libs/minilibx
 
 clean_osx:
 			rm -rf obj/
-			@make clean -C libs/ft_printf
+#			@make clean -C libs/ft_printf
 			@make clean -C libs/minilibx_OSX
 
 fclean:		clean
 			rm -rf $(NAME)
 			@make fclean -C libs/ft_printf
+			@make fclean -C libs/get_next_line
+			@make fclean -C libs/libft
 
 re:			fclean all
 
