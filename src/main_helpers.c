@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   main_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 20:25:59 by fchrysta          #+#    #+#             */
-/*   Updated: 2021/10/18 23:45:01 by fchrysta         ###   ########.fr       */
+/*   Created: 2022/05/02 12:37:19 by fchrysta          #+#    #+#             */
+/*   Updated: 2022/05/02 12:58:15 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../hdr/so_long.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+int	init_vars(t_vars *vars)
 {
-	size_t	i;
-	size_t	dst_len;
-	size_t	src_len;
-
-	i = 0;
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen(src);
-	if (size < dst_len)
-		return (src_len + size);
-	while (((dst_len + i + 1) < size) && src[i])
-	{
-		dst[dst_len + i] = src[i];
-		i++;
-	}
-	dst[dst_len + i] = 0;
-	return (dst_len + src_len);
+	vars->mlx = NULL;
+	vars->window = NULL;
+	vars->map[0] = NULL;
+	vars->exit_msg = "Done";
+	vars->map_w = 0;
+	vars->map_h = 0;
+	vars->collected = 0;
+	return (0);
 }

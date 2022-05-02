@@ -11,7 +11,10 @@ int key_hook(int keycode, t_vars *vars)
 	//(void)vars;
 	ft_printf("keycode is %d\n", keycode);
 	if (keycode == ESC_KEY)
-		dstr_w(vars);
+	{
+		vars->exit_msg = "ESC key pressed";
+		exit_now(vars);
+	}
 	if (keycode == W_KEY)
 	{
 		vars->player.y -= 42;

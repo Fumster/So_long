@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   destroyer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 14:22:20 by fchrysta          #+#    #+#             */
-/*   Updated: 2021/10/23 16:57:31 by fchrysta         ###   ########.fr       */
+/*   Created: 2022/05/02 11:42:36 by fchrysta          #+#    #+#             */
+/*   Updated: 2022/05/02 14:27:04 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../hdr/so_long.h"
 
-void	ft_lstclear(t_list **lst, void (*del) (void*))
+int	exit_now(t_vars *vars)
 {
-	t_list	*t_next;
+	int	i;
 
-	while (*lst)
+	i = 0;
+	if (vars->window)
+		mlx_destroy_window(vars->mlx, vars->window);
+	while (vars->map[i])
 	{
-		t_next = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = t_next;
+		free(vars->map[i]);
+		i++;
 	}
-	free(*lst);
-	lst = NULL;
+	if (vars->exit_msg)
+		ft_printf("%s", vars->exit_msg);
+	exit(0);
 }

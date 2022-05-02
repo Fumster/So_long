@@ -49,8 +49,9 @@ typedef struct s_vars
 	void		*window;
 	int			map_w;
 	int			map_h;
-	char		map[200][200];
+	char		*map[200];
 	int			collected;
+	char		*exit_msg;
 	t_sprite	player;
 	t_sprite	enemy[100];
 	t_ambiance	wall;
@@ -61,5 +62,9 @@ typedef struct s_vars
 
 int	dstr_w(t_vars *vars);
 int	key_hook(int keycode, t_vars *vars);
+int read_map (t_vars *vars, char *path);
+int exit_now(t_vars *vars);
+int init_vars(t_vars *vars);
+int validate_map(t_vars *vars);
 
 #endif
