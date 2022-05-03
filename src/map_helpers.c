@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:24:05 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/02 18:03:26 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:25:46 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../hdr/so_long.h"
@@ -14,7 +14,7 @@
 void	delete_linebreaks(t_vars *vars)
 {
 	int	i;
- 	int	j;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -22,7 +22,7 @@ void	delete_linebreaks(t_vars *vars)
 	{
 		while (vars->map[j][i])
 		{
-			if(vars->map[j][i] == '\n')
+			if (vars->map[j][i] == '\n')
 				vars->map[j][i] = 0;
 			i++;
 		}
@@ -35,7 +35,7 @@ void	write_map_size(t_vars *vars)
 {
 	int	w;
 	int	h;
-	
+
 	w = 0;
 	h = 0;
 	while (vars->map[h])
@@ -46,11 +46,19 @@ void	write_map_size(t_vars *vars)
 	vars->map_h = h;
 }
 
-int read_map (t_vars *vars, char *path)
+void	validate_map(t_vars *vars)
+{
+	check_symbols(vars, vars->map, 0, 0);
+	check_rectangle(vars, vars->map, 0, 0);
+	check_borders(vars, vars->map, 0, 0);
+	check_sprites(vars, vars->map);
+}
+
+void	read_map(t_vars *vars, char *path)
 {
 	int	i;
 	int	fd;
-	
+
 	i = 0;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -67,5 +75,4 @@ int read_map (t_vars *vars, char *path)
 	delete_linebreaks(vars);
 	write_map_size(vars);
 	validate_map(vars);
-	return(0);
 }

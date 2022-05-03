@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:42:36 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/02 14:27:04 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:26:42 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ int	exit_now(t_vars *vars)
 	if (vars->exit_msg)
 		ft_printf("%s", vars->exit_msg);
 	exit(0);
+	return (0);
 }

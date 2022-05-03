@@ -13,7 +13,7 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 LIBS +=		-L./libs/ft_printf -lftprintf -L./libs/get_next_line -lgetnextline
-SOURCES = 	main.c mlx_helpers.c map_helpers.c main_helpers.c destroyer.c map_validator.c
+SOURCES = 	main.c drawer.c mlx_helpers.c map_helpers.c main_helpers.c destroyer.c map_validator.c
 OBJECTS =	$(SOURCES:.c=.o)
 HEADER = 	so_long.h
 CC = 		gcc
