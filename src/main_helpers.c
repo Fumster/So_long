@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:37:19 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/03 18:09:23 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/07 13:54:59 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ void	init_vars(t_vars *vars)
 	vars->exit_msg = "Thanks for playing!\n";
 	vars->map_w = 0;
 	vars->map_h = 0;
-	vars->collected = 0;
 	vars->need_collect = 0;
 	vars->enemy_cntr = 0;
+	vars->steps = 0;
+}
+
+void	init_player(t_vars *vars, int x, int y)
+{
+	vars->player.x = x;
+	vars->player.y = y;
 }
 
 void	init_sprites(t_vars *vars)
@@ -37,11 +43,7 @@ void	init_sprites(t_vars *vars)
 		while (i < vars->map_w)
 		{
 			if (vars->map[j][i] == 'P')
-			{
-				vars->player.x = i * 42;
-				vars->player.y = j * 42;
-				return ;
-			}
+				init_player(vars, i, j);
 			i++;
 		}
 		i = 0;

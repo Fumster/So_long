@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:06:59 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/03 18:27:36 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/07 14:35:07 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ typedef struct s_vars
 	void		*window;
 	int			map_w;
 	int			map_h;
-	char		*map[200];
-	int			collected;
+	char		*map[202];
 	int			need_collect;
 	int			enemy_cntr;
+	int			steps;
 	char		*exit_msg;
 	t_sprite	player;
 	t_sprite	enemy[100];
@@ -79,6 +79,7 @@ int		key_hook(int keycode, t_vars *vars);
 void	read_map(t_vars *vars, char *path);
 int		exit_now(t_vars *vars);
 void	init_vars(t_vars *vars);
+void	move_player(t_vars *vars, int x, int y);
 void	init_sprites(t_vars *vars);
 void	open_images(t_vars *vars);
 void	draw_map(t_vars *vars);

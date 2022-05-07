@@ -13,8 +13,12 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 LIBS +=		-L./libs/ft_printf -lftprintf -L./libs/get_next_line -lgetnextline
-SOURCES = 	main.c drawer.c mlx_helpers.c map_helpers.c main_helpers.c destroyer.c map_validator.c
+SOURCES = 	main.c map_drawer.c mlx_helpers.c map_helpers.c main_helpers.c \
+			destroyer.c map_validator.c player_mover.c
+SOURCES_B = 	main_b.c map_drawer.c mlx_helpers.c map_helpers.c main_helpers.c \
+				destroyer.c map_validator.c player_mover.c
 OBJECTS =	$(SOURCES:.c=.o)
+OBJECTS_B =	$(SOURCES_B:.c=.o)
 HEADER = 	so_long.h
 CC = 		gcc
 NAME =		so_long
@@ -23,7 +27,7 @@ VPATH = 	obj:src:hdr
 
 .PHONY:		all re clean fclean
 
-all:		gnl ftprintf $(MLX) $(NAME)
+all:		$(NAME)
 
 gnl:	
 			@make -C libs/get_next_line
@@ -37,8 +41,11 @@ mlx_lin:
 mlx_osx:
 			@make -C libs/minilibx_OSX
 
-$(NAME):	$(OBJECTS)
+$(NAME):	gnl ftprintf $(MLX) $(OBJECTS)
 			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS)) $(LIBS) -o $@
+
+bonus:		gnl ftprintf $(MLX) $(OBJECTS_B)
+			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS_B)) $(LIBS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
 			@mkdir -p obj
