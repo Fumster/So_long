@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:06:06 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/08 12:58:08 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/08 14:28:45 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	put_image(t_vars *vars, int x, int y)
 			x * 42, y * 42);
 	else if (vars->map[y][x] == 'E')
 		mlx_put_image_to_window(vars->mlx, vars->window, vars->exit.img,
+			x * 42, y * 42);
+	else if (vars->map[y][x] == 'D')
+		mlx_put_image_to_window(vars->mlx, vars->window, vars->enemy[0].img,
 			x * 42, y * 42);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:37:19 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/08 14:48:47 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/08 17:30:54 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ void	init_player(t_vars *vars, int x, int y)
 	vars->player.y = y;
 }
 
+void	init_enemy(t_vars *vars, int x, int y)
+{
+	static int	i;
+
+	vars->enemy[i].x = x;
+	vars->enemy[i].y = y;
+	i++;
+	vars->enemy_cntr = i;
+}
+
 void	init_sprites(t_vars *vars)
 {
 	int	i;
@@ -44,6 +54,8 @@ void	init_sprites(t_vars *vars)
 		{
 			if (vars->map[j][i] == 'P')
 				init_player(vars, i, j);
+			if (vars->map[j][i] == 'D')
+				init_enemy(vars, i, j);
 			i++;
 		}
 		i = 0;

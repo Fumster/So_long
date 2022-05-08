@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:06:59 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/07 14:35:07 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/08 18:08:31 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_vars
 	t_ambiance	wall;
 	t_ambiance	floor;
 	t_ambiance	exit;
-	t_ambiance	item;
+	t_ambiance	item[5];
 }				t_vars;
 
 int		dstr_w(t_vars *vars);
@@ -80,9 +80,11 @@ void	read_map(t_vars *vars, char *path);
 int		exit_now(t_vars *vars);
 void	init_vars(t_vars *vars);
 void	move_player(t_vars *vars, int x, int y);
+int		move_enemy(t_vars *vars);
 void	init_sprites(t_vars *vars);
 void	open_images(t_vars *vars);
 void	draw_map(t_vars *vars);
+char	*ft_itoa(int n);
 void	check_sprites(t_vars *vars, char **map);
 void	check_borders(t_vars *vars, char **map, int i, int j);
 void	check_rectangle(t_vars *vars, char **map, int i, int j);

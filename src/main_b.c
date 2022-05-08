@@ -6,45 +6,55 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:22:44 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/07 17:11:28 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/08 17:15:15 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdr/so_long.h"
 
-void	put_animation_picture(t_vars *vars, int x, int y, int c)
+void	put_picture(t_vars *vars, int x, int y, void *pict)
 {
-	if (c == 0)
-		mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->floor.img, x * 42, y * 42);
-	else if (c == 2000)
-		mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->item.img, x * 42, y * 42);
-
+	mlx_put_image_to_window(vars->mlx, vars->window,
+		vars->floor.img, x * 42, y * 42);
+	mlx_put_image_to_window(vars->mlx, vars->window,
+		pict, x * 42, y * 42);
 }
 
-int	animate_items(t_vars *vars)
+void	put_animation_picture(t_vars *vars, int c, int i, int j)
 {
-	int			i;
-	int			j;
-	static int	c;
-
-	i = 0;
-	j = 0;
 	while (vars->map[j])
 	{
 		while (vars->map[j][i])
 		{
-			if(vars->map[j][i] == 'C')
-				put_animation_picture(vars, i, j, c);
+			if (vars->map[j][i] == 'C')
+			{
+				if (c == 0)
+					put_picture(vars, i, j, vars->item[0].img);
+				else if (c == 2000)
+					put_picture(vars, i, j, vars->item[1].img);
+				else if (c == 4000)
+					put_picture(vars, i, j, vars->item[2].img);
+				else if (c == 6000)
+					put_picture(vars, i, j, vars->item[1].img);
+			}
 			i++;
 		}
 		i = 0;
 		j++;
 	}
-	if (c < 4000)
+}
+
+int	animate_items(t_vars *vars)
+{
+	static int	c;
+
+	if (c == 0 || c == 2000 || c == 4000 || c == 6000)
+		put_animation_picture(vars, c, 0, 0);
+	if (c == 0 || c == 4000)
+		move_enemy(vars);
+	if (c < 8000)
 		c++;
-	else if (c == 4000)
+	else
 		c = 0;
 	return (0);
 }

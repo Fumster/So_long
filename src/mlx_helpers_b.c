@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:05:39 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/08 12:56:10 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/08 14:56:54 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ void	open_images(t_vars *vars)
 	vars->wall.img = do_open(vars, "img/wall.xpm");
 	vars->floor.img = do_open(vars, "img/floor.xpm");
 	vars->item[0].img = do_open(vars, "img/item.xpm");
+	vars->item[1].img = do_open(vars, "img/item2.xpm");
+	vars->item[2].img = do_open(vars, "img/item3.xpm");
+	vars->enemy[0].img = do_open(vars, "img/enemy.xpm");
 	vars->exit.img = do_open(vars, "img/exit.xpm");
 }

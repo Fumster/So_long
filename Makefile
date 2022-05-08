@@ -15,8 +15,9 @@ endif
 LIBS +=		-L./libs/ft_printf -lftprintf -L./libs/get_next_line -lgetnextline
 SOURCES = 	main.c map_drawer.c mlx_helpers.c map_helpers.c main_helpers.c \
 			destroyer.c map_validator.c player_mover.c
-SOURCES_B = 	main_b.c map_drawer.c mlx_helpers.c map_helpers.c main_helpers.c \
-				destroyer.c map_validator.c player_mover.c
+SOURCES_B = 	main_b.c map_drawer_b.c mlx_helpers_b.c map_helpers.c \
+				main_helpers_b.c destroyer.c map_validator_b.c player_mover_b.c \
+				enemy_mover.c ft_itoa.c
 OBJECTS =	$(SOURCES:.c=.o)
 OBJECTS_B =	$(SOURCES_B:.c=.o)
 HEADER = 	so_long.h
