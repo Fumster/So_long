@@ -6,7 +6,7 @@
 #    By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/13 20:05:23 by fchrysta          #+#    #+#              #
-#    Updated: 2021/12/13 21:04:05 by fchrysta         ###   ########.fr        #
+#    Updated: 2022/05/09 16:16:10 by fchrysta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,14 @@ FLAGS =			-Wall -Wextra -Werror
 
 .PHONY: all re clean fclean
 
-all	:			$(SOURCES) $(NAME)
+all	:			$(NAME)
 
 
 $(NAME)	:		$(OBJECTS)
-					ar -rc $(NAME) $^
+				ar -rc $(NAME) $^
 
-$(OBJECTS) :	$(SOURCES) $(HEADER)
-				$(CC) $(FLAGS) $(SOURCES) -c
+%.o :			%.c $(HEADER)
+				$(CC) $(FLAGS) $< -c
 
 clean :
 					rm -rf $(OBJECTS) ft_printf.h.gch

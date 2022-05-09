@@ -1,18 +1,22 @@
 UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-	LIBS = -L./libs/minilibx -lmlx -L/usr/lib -lXext -lX11 -lm -lbsd
+	INCLUDES = -aL./libs/minilibx -lmlx -L/usr/lib -lXext -lX11 -lm -lbsd
 	MLX = mlx_lin
+	LIB_MLX = ./libs/minilibx/libmlx.a
 	CLEAN = clean_lin
 
 endif
 ifeq ($(UNAME_S),Darwin)
-	LIBS = -L./libs/minilibx_OSX -lmlx -framework OpenGL -framework AppKit
+	INCLUDES = -L./libs/minilibx_OSX -lmlx -framework OpenGL -framework AppKit
 	MLX = mlx_osx
+	LIB_MLX = ./libs/minilibx_OSX/libmlx.a
 	CLEAN = clean_osx
 endif
 
-LIBS +=		-L./libs/ft_printf -lftprintf -L./libs/get_next_line -lgetnextline
+INCLUDES +=		-L./libs/ft_printf -lftprintf -L./libs/get_next_line -lgetnextline
+LIB_PRINTF =	./libs/ft_printf/libftprintf.a
+LIB_GNL =	./libs/get_next_line/libgetnextline.a
 SOURCES = 	main.c map_drawer.c mlx_helpers.c map_helpers.c main_helpers.c \
 			destroyer.c map_validator.c player_mover.c
 SOURCES_B = 	main_b.c map_drawer_b.c mlx_helpers_b.c map_helpers.c \
@@ -23,18 +27,25 @@ OBJECTS_B =	$(SOURCES_B:.c=.o)
 HEADER = 	so_long.h
 CC = 		gcc
 NAME =		so_long
+BONUS =		so_long_b
 FLAGS =		-Wall -Wextra -Werror
 VPATH = 	obj:src:hdr
 
-.PHONY:		all re clean fclean
+.PHONY:		all re clean fclean libs
 
-all:		$(NAME)
+all:		libs $(NAME)
 
-gnl:	
+libs:		$(MLX)
+			@make -C libs/get_next_line
+			@make -C libs/ft_printf
+
+$(LIB_GNL):	
 			@make -C libs/get_next_line
 
-ftprintf:	
+$(LIB_PRINTF):	
 			@make -C libs/ft_printf
+
+$(LIB_MLX): $(MLX)
 
 mlx_lin:
 			@make -C libs/minilibx
@@ -42,11 +53,13 @@ mlx_lin:
 mlx_osx:
 			@make -C libs/minilibx_OSX
 
-$(NAME):	gnl ftprintf $(MLX) $(OBJECTS)
-			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS)) $(LIBS) -o $@
+$(NAME):	$(OBJECTS) $(LIB_PRINTF) $(LIB_GNL) $(LIB_MLX)
+			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS)) $(INCLUDES) -o $@
 
-bonus:		gnl ftprintf $(MLX) $(OBJECTS_B)
-			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS_B)) $(LIBS) -o $(NAME)
+bonus:		libs $(BONUS)
+	
+$(BONUS):	$(OBJECTS_B) $(LIB_PRINTF) $(LIB_GNL) $(LIB_MLX)
+			$(CC) $(FLAGS) $(addprefix obj/,$(OBJECTS_B)) $(INCLUDES) -o so_long_b
 
 %.o:		%.c $(HEADER)
 			@mkdir -p obj
@@ -67,6 +80,7 @@ clean_osx:
 
 fclean:		clean
 			rm -rf $(NAME)
+			rm -rf $(BONUS)
 			@make fclean -C libs/ft_printf
 			@make fclean -C libs/get_next_line
 
@@ -75,7 +89,7 @@ re:			fclean all
 os:
 			@echo $(UNAME_S)
 			@echo $(MLX)
-			@echo $(LIBS)
+			@echo $(INCLUDES)
 			@echo $(CLEAN)
 
 
