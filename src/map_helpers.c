@@ -6,7 +6,7 @@
 /*   By: fchrysta <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:24:05 by fchrysta          #+#    #+#             */
-/*   Updated: 2022/05/07 11:36:04 by fchrysta         ###   ########.fr       */
+/*   Updated: 2022/05/14 15:47:14 by fchrysta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../hdr/so_long.h"
@@ -18,6 +18,11 @@ void	delete_linebreaks(t_vars *vars)
 
 	i = 0;
 	j = 0;
+	if (vars->map[0] == NULL)
+	{
+		vars->exit_msg = "Error\nMap is empty\n";
+		exit_now(vars);
+	}
 	while (vars->map[j])
 	{
 		while (vars->map[j][i])
@@ -33,7 +38,7 @@ void	delete_linebreaks(t_vars *vars)
 
 void	call_big_map_error(t_vars *vars)
 {
-	vars->exit_msg = "Error\nMap is too big, max map size is 60X30n";
+	vars->exit_msg = "Error\nMap is too big, max map size is 60X30n\n";
 	exit_now(vars);
 }
 
