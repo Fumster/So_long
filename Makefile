@@ -1,7 +1,7 @@
 UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-	INCLUDES = -aL./libs/minilibx -lmlx -L/usr/lib -lXext -lX11 -lm -lbsd
+	INCLUDES = -L./libs/minilibx -lmlx -L/usr/lib -lXext -lX11 -lm -lbsd
 	MLX = mlx_lin
 	LIB_MLX = ./libs/minilibx/libmlx.a
 	CLEAN = clean_lin
